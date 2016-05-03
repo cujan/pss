@@ -1,0 +1,47 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+<div id="banner">
+	<h1 n:block=title>Výsledky prijímacích skúšok</h1>
+</div>
+
+<div id="content">
+ Naozaj si želáte potvrdiť príchod na zápis?
+ <br>
+ <br>
+ <br>
+ {control potvrdenieZapisuForm}
+ <br>
+ <br>
+ <br>
+ <br>
+ <a n:href="default">Nie, návrat na výsledky</a>
+	
+
+	
+
+	
+</div>
+{/block}
+
+{block scripts}
+{include #parent}
+<script src="http://jush.sourceforge.net/jush.js"></script>
+<script>
+	jush.create_links = false;
+	jush.highlight_tag('code');
+	$('code.jush').each(function(){ $(this).html($(this).html().replace(/\x7B[/$\w].*?\}/g, '<span class="jush-latte">$&</span>')) });
+
+	$('a[href^=#]').click(function(){
+		$('html,body').animate({ scrollTop: $($(this).attr('href')).show().offset().top - 5 }, 'fast');
+		return false;
+	});
+</script>
+{/block}
+
+
+{block head}
+<style>
+
+</style>
+{/block}

@@ -1,0 +1,85 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+<div id="banner">
+	<h1 n:block=title>Konečné výsledky prijímacích skúšok</h1>
+</div>
+
+<div id="content">
+	<h2>Zadajte prosím svoj kód žiaka:</h2>
+
+	
+	{control vysledokForm}
+
+	
+{if $vysledky <> NULL}
+<div id="tableVysledok">
+<table border="1" cellpadding="5">
+	
+    <tbody>
+	<tr id="tableHlavicka" >
+	    
+	    <td>Kód žiaka</td>
+	    <td>Body ZŠ</td>
+	    <td>Body T9</td>
+	    <td>Body PS SJL</td>
+	    <td>Body PS PRI</td>
+	    <td>Body PS spolu</td>
+	    <td>Body spolu</td>
+	    <td>Umiestnenie</td>
+	    <td>Priebežné rozhodnutie</td>
+	    <td>Konečné Rozhodnutie</td>
+	    <td>Elektronické Potvrdenie zápisu</td>
+	    
+	</tr>  
+    
+	{foreach $vysledky  as $vysledok}
+	<tr>
+	    <td>{$vysledok->kodZiaka}</td>
+	    <td>{$vysledok->bodyZs}</td>
+	    <td>{$vysledok->bodyT9}</td>
+	    <td>{$vysledok->bodyPsSjl}</td>
+	    <td>{$vysledok->bodyPsPri}</td>
+	    <td>{$vysledok->bodPs}</td>
+	    <td>{$vysledok->bodySpolu}</td>
+	    <td>{$vysledok->umiestnenie}</td>
+	    <td>{$vysledok->rozhodnutie}</td>
+	    <td>{$vysledok->rozhodnutieKonecne}</td>
+	    <td><a n:href="detail $vysledok->id">Potvrdenie zápisu</a></td>
+	</tr>
+	{/foreach}
+    </tbody>
+</table>
+</div>
+
+{/if}
+* - prijatý za predpokladu, že sa posunie na voľné miesto po zápise v dňoch 21. - 22.5.2015<br> 	
+* - prijatý za predpokladu, že si podá prihlášku na nenaplnený počet žiakov v zameraní lesníctvo - krajinná ekológia<br>
+* - prijatý za predpokladu, že si podá prihlášku na učebný odbor rybár, mechanizátor lesnej výroby<br>
+
+
+	
+</div>
+{/block}
+
+{block scripts}
+{include #parent}
+<script src="http://jush.sourceforge.net/jush.js"></script>
+<script>
+	jush.create_links = false;
+	jush.highlight_tag('code');
+	$('code.jush').each(function(){ $(this).html($(this).html().replace(/\x7B[/$\w].*?\}/g, '<span class="jush-latte">$&</span>')) });
+
+	$('a[href^=#]').click(function(){
+		$('html,body').animate({ scrollTop: $($(this).attr('href')).show().offset().top - 5 }, 'fast');
+		return false;
+	});
+</script>
+{/block}
+
+
+{block head}
+<style>
+
+</style>
+{/block}
